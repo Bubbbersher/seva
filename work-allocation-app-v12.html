@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>सेवा नियोजन</title>
+
+<!-- App icon for browser tab + "Add to Home Screen" on mobile -->
+<link rel="icon" type="image/png" href="data:image/png;base64,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" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAATz0lEQVR4nO3dv44k13UH4N7FhoIAJoZhPocFGSBBwzI2VeIXUciEgpko9IswcbqwDBgkYEF+BMdrGE4IEMzlYNjcmdme7q6q++ece74PUCBidll1u/r+fnWqe/jqRCi/ffv+L7OPAaCHf3336avZx8AHXozBBDzAZQrCWBa7I2EPcIxS0I+FbUjgA/SlELRjIQ8Q+ABzKQT7WbiNhD5ATMrANhbrDkIfIBdl4DYLdIXgB8hNEXiZhXlG6AOsSRl4ymL8RPAD1KAIPCi/CIIfoKbqRaDsyQt+AE6nukWg3EkLfgAuqVYEypys4AfgHlWKwPInKfgB2GP1IrDsyQl+AFpYtQi8nn0APQh/AFpZNVOWajWrvkgAxLDSNGCJExH8AIy0QhFI/whA+AMw2grZk7oArPACAJBT9gxKOcLIvugArCXjI4F0EwDhD0A0GbMpVQHIuMAA1JAto1KMLLItKgC1ZXgkEH4CIPwByCZDdoUuABkWEAAuiZ5hYQtA9IUDgFsiZ1nIAhB5wQBgi6iZFq4ARF0oANgrYraF+ZRixMUBgNaifEMgxARA+ANQRZTMm14AoiwEAIwSIfumFoAICwAAM8zOwGkFYPaJA8BsM7Nw+iMAAGC8KQXA3T8APJiVicMLgPAHgKdmZOPQAiD8AeCy0Rk5rAAIfwC4bmRWDikAwh8A7jMqM7sXAOEPANuMyE5fAwSAgroWAHf/ALBP7wztVgCEPwAc0zNLuxQA4Q8AbfTKVJ8BAICCmhcAd/8A0FaPbG1aAIQ/APTROmObFQDhDwB9tcxanwEAgIKaFAB3/wAwRqvMNQEAgIIOFwB3/wAwVovsPVQAhD8AzHE0gz0CAICCdhcAd/8AMNeRLDYBAICCdhUAd/8AEMPeTDYBAICCNhcAd/8AEMuebDYBAICCNhUAd/8AENPWjDYBAICC7i4A7v4BILYtWW0CAAAF3VUA3P0DQA73ZrYJAAAUdLMAuPsHgFzuyW4TAAAoSAEAgIKuFgDjfwDI6VaGmwAAQEEvFgB3/wCQ27UsNwEAgIIUAAAo6GIBMP4HgDW8lOkmAABQkAIAAAV9VACM/wFgLZey3QQAAApSAACgIAUAAAp6UgA8/weANT3PeBMAAChIAQCAghQAACjo5wLg+T8ArO1x1psAAEBBCgAAFKQAAEBBCgAAFPT6dPIBQACo4pz5JgAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUNArvwMAAOoxAQCAghQAAChIAQCAghQAAChIAQCAghQAAChIAQCAghQAAChIAQCAghQAAChIAQCAghQAAChIAQCAghQAAChIAQCAgt7MPgBo5X//79+f/P+//qt/uPjP4BrXEVUoAKT3fHO+52dt4DznOqIaBYC0tmzYL/1ZGziuI6ryGQBSOrJp9/h7yMl1RGUKAOm03mxt3jW5jqhOASCVXpuszbsW1xEoAABQkgJAGr3vrty91eA6ggcKAAAUpACQwqi7Kndva3MdwQcKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEEKAAAUpAAAQEFvZh8AY33z5RezD2GXz373+81/5psvv9j951iT6+i2f/rDf8w+BAZRABaXdRMC5ni+ZygE61IAFiT0gVYe7yfKwFoUgIUIfqCn8x6jCKxBAViA4AdGUgTWoAAkJviBmRSB3HwNMCnhD0RhP8pJAUjImw2Ixr6Uj0cAiXiDAZF5JJCLCUASwh/Iwn6VgwKQgDcTkI19Kz4FIDhvIiAr+1dsCgAAFKQABKY9A9nZx+JSAILypnnqu3/556X+PczhOprDfhaTAhCQNwuwGvtaPAoAafS+q3LXVoPrCB4oAMFoycCq7G+xKACk0uvuyl1bLa4jUABC0Y7v03qTtWnX5Dqawz4XhwJASq02W5t2ba4jKvMfAwpCK97uvOl+9rvf7/6z4Doa75svv/AfDApAASC9LRu4DZuXuI6o5tVv377/y+yDwAQAqMUEYD6fAQhA+APV2PfmUwAAoCAFAAAKUgAAoCAFYDLPwYCq7H9zKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFvZl9ANW9+fv/nn0IAPP84X9mH0FZJgAAUJAJAMAkn7z7+ubPfP/2qwFHQkUKAMBg9wT/859VBGhNAQAYZEvwv/RnFQFaUQAAOjsS/C/9XYoAR/kQIEBHLcN/xN9LHQoAQCe9Q1oJ4AgFAKCDUeGsBLCXAgDQ2OhQVgLYQwEAgIIUAICGZt2NmwKwlQIA0IgQJhMFAKCBCOEf4RjIQwEAOEjwkpECAHBAtPCPdjzEpQAA7CRsyUwBANhB+JOdAgCwkfBnBQoAABSkAABs4O6fVSgAAHcS/qxEAQC4g/BnNQoAwA3CnxUpAABXZAv/799+NfsQSEIBAHhBtvCHLRQAgAsyhr+7f7ZQAACeyRj+sJUCAPBI1vB3989WCgDAT7KGP+yhAACccoe/u3/2UACA8oQ/FSkAQGnCn6oUAKAs4U9lCgBQkvCnOgUAKEf4gwIAFCP84YECAJQh/OEDBQAoQfjDUwoAsDzhDx9TAIClCX+4TAEACEj405sCACwr890/9KYAAEvKHP7u/hlBAQCWI/zhNgUAWIrwh/soAMAyhD/cTwEAliD8YRsFAEhP+MN2CgCQmvCHfRQAIC3hD/spAEBKwh+OUQCAdIQ/HKcAAKkIf2hDAQDSEP7QjgIApCD8oS0FAAhP+EN7CgAQmvCHPhQAICzhD/0oAEBIwh/6UgCAcIQ/9KcAAKEIfxhDAQDCEP4wjgIAcJDwJyMFAAgh890/ZKQAANNlDn93/2T1ZvYBwGP3BIENdy3CH+ZQAAhhSwicf9bmm5/wh3kUAKY6EgCKQG7CH+ZSAJii5eavCOQj/GE+HwJkuF6bf+ZQqSTz6yT8WYkCwFC9N//M4VJB5tdH+LMaBYBhRm3+mUNmZZlfF+HPihQAhhi9+WcOmxVlfj2EP6tSAICuhD/EpADQ3awAyBw8q8j8Ggh/VqcAsLTMAZRd5rUX/lSgANBVhBCIcAzVZF5z4U8VCgAlZA6kbDKvtfCnEgWAbqIFQbTjWVHmNRb+VKMAUErmgIou89oKfypSACgnc1BFlXlNhT9VKQCUlDmwosm8lsKfyhQAysocXFFkXkPhT3UKAKVlDjD2E/6gAIASsFPWdRP+8EABgFPeMJvFekF+CgD8RKjdJ/M6ufuHDxQAusm42WYOtxEyr0/G6xF6UgCAuwh/WIsCQFcZN97MQddL5jXJeA3CCAoAXJA58FrLvBbCH16mANBd1k04c/C1knkNsl53MIoCAFdkDsCjMp+78IfbFACGyLwhZw7CvTKfc+ZrDUZSABgm88acORC3ynyuma8xGE0BYKjMG3TmYLxX5nPMfG3BDAoAw2XeqDMH5C2Zzy3zNQWzKABM8f3br9Ju2pmD8iWZzynrdQSzKQBMlXXzzhyYz2U+l6zXD0TwZvYBrO7HH95/fv0n/ubbMUcS1/dvv0oZQp+8+zp9AGVc97Psa8+Da3vkL375afn9sScFoIHbIc8tSsB4Gdf7LOuas41y0JcCsJGw70cJGCfjOp9lW2v6uLQXKwXbKAA3CPyxlID+Mq7vWZY1Zo7n+7VCcJ0C8IzAn08J6Cfjup5FX1viUQiu8y2A08NFcv7f7GPhQdbNPnLARj62W7JeD8Rir3+qdAFwIcSWddPPHLQRZb0OiM3+X7AAaIC5ZN38o5WAaMcDUVTOhDIFoOoLvAIl4Jgox7FH1teenKrlxPIFoNoLuqqsQTA7fGf/+4/I+pqTX5XcWLYAVHkBK8kaCLNCWPjDMavnyHIFYPUXrLqswTA6jIU/tLNqrixTAFZ9gVjHqFAW/tDHajmTvgCs9oJwW+aQ6B3Owh/6WyV30haAVV4A9skcFr1CWvjDWNlzKGUByLzgtJM5NFqHtfCHebJmUqoCkL1t0V7m8GgV2sIf5suYT2kKQLaFZZzMIXI0vIU/xJIpq1IUgEwLyhyZw2RviAt/iClLZoUuABlHKsyTOVS2hrnwh9gy5FfYAhB94Ygpc7jcG+rCH/KInGUhC0DkBSO+zCFzK9yFP+QTNdNCFYAMIxNyWDFshD/kFTHfwhSAaAtDfllD51LQC39YQ6SsC1EAIi0Ia8kaPo8DX/jDWqJk3vQCEGUhWFfWEPrk3dfCHxYVIfumFoAIC0ANwmgs6w23zc7AaQVg9olTj1AawzrD/WZm4ZQCIPyZRTj1ZX1hu1mZOLwACH9mE1JANDOycWgBEP5EoQS0Z03hmNEZOawACH+iEVjtWEtoY2RWDikAwp+oBNdx1hDaGpWZ3QuA8Cc6AbaftYM+RmRn1wIg/MlCkG1nzaCv3hnarQAIf7IRaPezVjBGzyyd/quAIRLBdps1gjV0KQDu/slMwL3M2sB4vTK1eQEQ/qxA0H3MmsA8PbK1aQEQ/qxE4H1gLWC+1hnrMwBwheCzBrCqZgXA3T+rqhyAlc8dImqZtU0KgPBndRWDsOI5QwatMvdwARD+VFEpECudK2TUInt9BgA2qBCMFc4ROFgA3P3DWoQ/5HE0g3cXAOFPVauG5KrnBSs7ksUeAcAOq4XlaucD3LarALj7h3VCc5XzgKr2ZrIJAByQPTyzHz+w3+YC4O4fnsoaolmPG/jYnmw2AYAGhCmQzaYC4O4fXpapBGQ6VuA+WzPaBAAayhCsGY4R6O/uAuDuH+4TOWAjHxtw3JasNgGADiIGbcRjAua5qwC4+4ftIgVupGMB+ro3s00AoKMIwRvhGIB4bhYAd/9wzMwAFv5Q0z3ZbQIAixL+wDVXC4C7f2hjdBgLf+BWhpsAwCCjQln4A/dQAGCg3uEs/IF7vVgAjP+hj14hLfyB565l+ZuRBwI8OIf1J+++bvZ3AWxxsQC4+4cxjhQBwQ/c48cf3n/+i19++u3zf24CAAFsKQKCH2hBAYBAhDswykcfAjT+B4C1XMp2XwMEgIIUAAAoSAEAgIKeFADP/wFgTc8z3gRgsn/8u/9SuoCS7H9zKQAAUJACAAAF/VwAPP8HgLU9znoTAAAoSAEIwAdhgGrse/MpAABQkAIAAAW9Pp18ADAC4zCgCvvdXOfMNwEAgIIUgEC0YmB19rk4FAAAKEgBCEY7BlZlf4tFAQCAghSAgLRkYDX2tXhe+wpgTN4swCrsZ/H8+MP7z00AAvOmAbKzj8WlAABAQQpAcNozkJX9KzYFIAFvIiAb+1Z8CkAS3kxAFvarHBSARLypgOjsU3koAMl4cwFR2Z9yefWbX//5s9kHwT7/9p9/++3sYwAQ/DmZACTmTQfMZh/KSwFIzpsPmMX+k5tHAAvxSAAYQfCvQQFYkCIA9CD416IALEwRAFoQ/GtSAIpQBoAthP76FIDClALgdBL2VSkAAFCQrwECQEEKAAAU9PqPf/rVd7MPAgAY549/+tV3JgAAUJACAAAFKQAAUJACAAAFKQAAUJACAAAFvT6dHr4OMPtAAID+zplvAgAABSkAAFCQAgAABSkAAFDQzwXABwEBYG2Ps94EAAAKUgAAoCAFAAAKelIAfA4AANb0PONNAACgIAUAAApSAACgoI8KgM8BAMBaLmW7CQAAFKQAAEBBFwuAxwAAsIaXMt0EAAAKerEAmAIAQG7XstwEAAAKUgAAoKCrBcBjAADI6VaGmwAAQEE3C4ApAADkck92mwAAQEF3FQBTAADI4d7MNgEAgILuLgCmAAAQ25asNgEAgII2FQBTAACIaWtGmwAAQEGbC4ApAADEsiebTQAAoKBdBcAUAABi2JvJJgAAUNDuAmAKAABzHcniQxMAJQAA5jiawR4BAEBBhwuAKQAAjNUie5tMAJQAABijVeY2ewSgBABAXy2z1mcAAKCgpgXAFAAA+midsc0nAEoAALTVI1u7PAJQAgCgjV6Z6jMAAFBQtwJgCgAAx/TM0q4TACUAAPbpnaHdHwEoAQCwzYjsHPIZACUAAO4zKjOHfQhQCQCA60Zm5dBvASgBAHDZ6Iwc/jVAJQAAnpqRjVN+D4ASAAAPZmXitF8EpAQAUN3MLJz6mwCVAACqmp2B038V8OwFAIDRImTf9AJwOsVYCAAYIUrmhSgAp1OcBQGAXiJl3avZB3DJb379589mHwMAtBIp+M/CTAAei7hQALBH1EwLWQBOp7gLBgD3ipxlIR8BPOeRAACZRA7+s7ATgMcyLCQAnE55MitFATid8iwoAHVlyqoUjwCe80gAgEgyBf9ZmgnAYxkXGoA1Zc2klBOAx0wDAJgha/CfpS8AZ4oAACNkD/6zZQrAmSIAQA+rBP/ZcgXgTBEAoIXVgv9s2QJwpggAsMeqwX+2fAE4UwQAuMfqwX9WpgCcKQIAXFIl+M/KFYDHlAGA2qqF/mOlC8CZIgBQS+XgP1MAnlEGANYk9J9SAG5QCAByEvjXKQAbKQQAMQn8bRSABpQCgLGE/XEKQGfKAcA+Qr6v/wc0q7Cqq3wa3AAAAABJRU5ErkJggg==" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="सेवा नियोजन" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#4f46e5" />
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- React + ReactDOM (version-pinned so the CDN can't silently serve something incompatible) -->
+<script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+
+<!-- Babel (lets the browser run JSX directly, no build step) -->
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<style>
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #error-box { display:none; white-space:pre-wrap; font-family: ui-monospace, monospace; font-size: 13px;
+    background:#fef2f2; color:#991b1b; border:1px solid #fecaca; border-radius:12px; padding:16px; margin:16px; }
+</style>
+
+<!-- Catches any script-loading or runtime error and shows it on the page instead of a blank screen -->
+<script>
+  window.addEventListener("error", function (e) {
+    var box = document.getElementById("error-box");
+    if (!box) return;
+    box.style.display = "block";
+    box.textContent += "Error: " + (e.message || e) + (e.filename ? "\n  at " + e.filename + ":" + e.lineno : "") + "\n\n";
+  });
+</script>
+</head>
+<body class="bg-slate-50">
+<div id="error-box"></div>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useMemo, useEffect, useRef } = React;
+
+/* ------------------------- ICONS (inline SVG, no external deps) ------------------------- */
+
+function Icon({ children, size = 16, className = "" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+      className={className}>
+      {children}
+    </svg>
+  );
+}
+const Plus = (p) => <Icon {...p}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></Icon>;
+const X = (p) => <Icon {...p}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></Icon>;
+const Trash2 = (p) => (
+  <Icon {...p}>
+    <polyline points="3 6 5 6 21 6"/>
+    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+    <path d="M10 11v6"/><path d="M14 11v6"/>
+    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+  </Icon>
+);
+const Pencil = (p) => <Icon {...p}><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></Icon>;
+const RotateCcw = (p) => <Icon {...p}><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></Icon>;
+const Users = (p) => (
+  <Icon {...p}>
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </Icon>
+);
+const Briefcase = (p) => (
+  <Icon {...p}>
+    <rect x="2" y="7" width="20" height="14" rx="2"/>
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+  </Icon>
+);
+const CalendarX2 = (p) => (
+  <Icon {...p}>
+    <rect x="3" y="4" width="18" height="18" rx="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+    <line x1="9" y1="16" x2="13" y2="20"/><line x1="13" y1="16" x2="9" y2="20"/>
+  </Icon>
+);
+const CheckCircle2 = (p) => <Icon {...p}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></Icon>;
+const CircleDashed = (p) => <Icon {...p}><circle cx="12" cy="12" r="9" strokeDasharray="3 3"/></Icon>;
+const Check = (p) => <Icon {...p}><polyline points="20 6 9 17 4 12"/></Icon>;
+const Share2 = (p) => (
+  <Icon {...p}>
+    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+  </Icon>
+);
+const Download = (p) => (
+  <Icon {...p}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </Icon>
+);
+const Upload = (p) => (
+  <Icon {...p}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="17 8 12 3 7 8"/>
+    <line x1="12" y1="3" x2="12" y2="15"/>
+  </Icon>
+);
+const Volume2 = (p) => (
+  <Icon {...p}>
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+  </Icon>
+);
+const VolumeX = (p) => (
+  <Icon {...p}>
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+    <line x1="23" y1="9" x2="17" y2="15"/>
+    <line x1="17" y1="9" x2="23" y2="15"/>
+  </Icon>
+);
+const Tag = (p) => (
+  <Icon {...p}>
+    <path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.24H4a2 2 0 0 0-2 2v5.59a2 2 0 0 0 .59 1.41l9.58 9.58a2 2 0 0 0 2.83 0l6.59-6.59a2 2 0 0 0 0-2.82z"/>
+    <circle cx="7.5" cy="7.5" r="1.5"/>
+  </Icon>
+);
+const ChevronLeft = (p) => <Icon {...p}><polyline points="15 18 9 12 15 6"/></Icon>;
+const ChevronRight = (p) => <Icon {...p}><polyline points="9 18 15 12 9 6"/></Icon>;
+const UserCheck = (p) => (
+  <Icon {...p}>
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <polyline points="16 11 18 13 22 9"/>
+  </Icon>
+);
+
+/* ------------------------- HELPERS ------------------------- */
+
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+function weekdayOf(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr + "T00:00:00");
+  return DAYS[(d.getDay() + 6) % 7];
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function todayISO() {
+  const d = new Date();
+  const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
+function tomorrowISO() {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
+const MONTH_NAMES = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+/* ------------------------- SOUND EFFECTS (generated, no audio files) ------------------------- */
+
+const SoundPref = { on: true };
+
+let sharedAudioCtx = null;
+function getAudioCtx() {
+  if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return sharedAudioCtx;
+}
+
+function tone(freqStart, freqEnd, duration, type, volume) {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type || "sine";
+    osc.frequency.setValueAtTime(freqStart, now);
+    if (freqEnd !== freqStart) osc.frequency.exponentialRampToValueAtTime(freqEnd, now + duration * 0.7);
+    gain.gain.setValueAtTime(volume ?? 0.07, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + duration + 0.02);
+  } catch (e) {
+    // Audio isn't available in some environments — fail silently.
+  }
+}
+
+const SOUND_LIBRARY = {
+  click: () => tone(523.25, 392, 0.11, "triangle", 0.05),
+  add: () => {
+    tone(523, 523, 0.07, "sine", 0.06);
+    setTimeout(() => tone(784, 784, 0.09, "sine", 0.06), 60);
+  },
+  remove: () => tone(500, 260, 0.15, "sine", 0.05),
+  toggle: () => tone(700, 700, 0.05, "sine", 0.045),
+  success: () => {
+    tone(660, 660, 0.08, "sine", 0.06);
+    setTimeout(() => tone(990, 990, 0.14, "sine", 0.06), 90);
+  },
+  error: () => tone(220, 180, 0.22, "sawtooth", 0.045),
+};
+
+function playSound(name) {
+  if (!SoundPref.on) return;
+  (SOUND_LIBRARY[name] || SOUND_LIBRARY.click)();
+}
+
+/* ------------------------- LOCAL PERSISTENCE ------------------------- */
+
+const STORAGE_KEY = "work-allocation-app-data-v1";
+
+function serializeState(people, tasks, tags) {
+  return JSON.stringify({
+    people: people.map((p) => ({ ...p, availableDays: Array.from(p.availableDays) })),
+    tasks,
+    tags,
+    savedAt: new Date().toISOString(),
+  });
+}
+
+function deserializeState(raw) {
+  const parsed = JSON.parse(raw);
+  if (!Array.isArray(parsed.people) || !Array.isArray(parsed.tasks)) throw new Error("Invalid data shape");
+
+  // Migrate older backups: tasks used to carry their own `date`, and assignments had no date.
+  // Now tasks are date-less (recurring daily) and each assignment carries the date it applies to.
+  const tasks = parsed.tasks.map((t) => {
+    const legacyDate = t.date;
+    const assignments = (t.assignments || []).map((a) => ({
+      personId: a.personId,
+      amount: a.amount,
+      date: a.date || legacyDate || todayISO(),
+    }));
+    const { date, ...rest } = t;
+    return { ...rest, assignments };
+  });
+
+  return {
+    people: parsed.people.map((p) => ({ ...p, availableDays: new Set(p.availableDays || []), tagIds: p.tagIds || [] })),
+    tasks,
+    tags: Array.isArray(parsed.tags) ? parsed.tags : [],
+  };
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return deserializeState(raw);
+  } catch (e) {
+    console.error("Failed to load saved data:", e);
+    return null;
+  }
+}
+
+function saveToStorage(people, tasks, tags) {
+  try {
+    localStorage.setItem(STORAGE_KEY, serializeState(people, tasks, tags));
+  } catch (e) {
+    console.error("Failed to save data:", e);
+  }
+}
+
+const PREFS_KEY = "work-allocation-app-prefs-v1";
+
+function loadPrefs() {
+  try {
+    const raw = localStorage.getItem(PREFS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function savePrefs(prefs) {
+  try {
+    localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  } catch (e) {
+    // ignore
+  }
+}
+
+let idCounter = 1000;
+const nextId = () => idCounter++;
+
+const seedPeople = [
+  { id: nextId(), name: "Priya Nair", availableDays: new Set(["Mon", "Wed", "Fri"]), blackoutDates: [], capacity: 1, notes: "", tagIds: [] },
+  { id: nextId(), name: "Marcus Lee", availableDays: new Set(["Mon", "Tue", "Wed", "Thu", "Fri"]), blackoutDates: [], capacity: 1, notes: "", tagIds: [] },
+  { id: nextId(), name: "Sofia Reyes", availableDays: new Set(["Tue", "Thu", "Sat"]), blackoutDates: [], capacity: 1, notes: "", tagIds: [] },
+];
+
+/* ------------------------- APP ------------------------- */
+
+function App() {
+  const [view, setView] = useState("people");
+  const [workingDate, setWorkingDate] = useState(() => tomorrowISO());
+  const [people, setPeople] = useState(() => {
+    const loaded = loadFromStorage();
+    return loaded ? loaded.people : seedPeople;
+  });
+  const [tasks, setTasks] = useState(() => {
+    const loaded = loadFromStorage();
+    return loaded ? loaded.tasks : [];
+  });
+  const [tags, setTags] = useState(() => {
+    const loaded = loadFromStorage();
+    return loaded ? loaded.tags : [];
+  });
+  const [dataMessage, setDataMessage] = useState("");
+  const [soundOn, setSoundOn] = useState(() => loadPrefs().soundOn !== false);
+  const theme = "indigo";
+  const restoreInputRef = useRef(null);
+
+  useEffect(() => {
+    SoundPref.on = soundOn;
+    savePrefs({ soundOn });
+  }, [soundOn]);
+
+  // Pleasant click sound on any button press, generated on the fly (no audio files needed).
+  // Buttons can set data-sound="add" | "remove" | "toggle" | "success" | "error" to pick a variant.
+  useEffect(() => {
+    const handler = (e) => {
+      const btn = e.target.closest("button");
+      if (btn) playSound(btn.dataset.sound || "click");
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
+
+  // Make sure freshly-created IDs never collide with IDs restored from storage.
+  useEffect(() => {
+    const allIds = [
+      ...people.map((p) => p.id),
+      ...tasks.map((t) => t.id),
+      ...tasks.flatMap((t) => (t.assignments || []).map((a) => a.personId)),
+      ...tags.map((t) => t.id),
+    ];
+    const maxId = allIds.length ? Math.max(...allIds) : 0;
+    if (maxId >= idCounter) idCounter = maxId + 1;
+    // eslint-disable-next-line
+  }, []);
+
+  // Persist to localStorage any time people, tasks, or tags change, so a refresh or reopen keeps everything.
+  useEffect(() => {
+    saveToStorage(people, tasks, tags);
+  }, [people, tasks, tags]);
+
+  const showDataMessage = (msg) => {
+    setDataMessage(msg);
+    setTimeout(() => setDataMessage(""), 3000);
+  };
+
+  const handleBackup = () => {
+    const payload = JSON.stringify(
+      {
+        people: people.map((p) => ({ ...p, availableDays: Array.from(p.availableDays) })),
+        tasks,
+        tags,
+        exportedAt: new Date().toISOString(),
+      },
+      null,
+      2
+    );
+    const blob = new Blob([payload], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `सेवा-नियोजन-backup-${todayISO()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showDataMessage("Backup downloaded.");
+    playSound("success");
+  };
+
+  const handleRestoreClick = () => restoreInputRef.current && restoreInputRef.current.click();
+
+  const handleRestoreFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!window.confirm("Restoring will replace all current people and tasks with the backup's contents. Continue?")) {
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const restored = deserializeState(evt.target.result);
+        setPeople(restored.people);
+        setTasks(restored.tasks);
+        setTags(restored.tags);
+        showDataMessage("Backup restored successfully.");
+        playSound("success");
+      } catch (err) {
+        showDataMessage("Couldn't read that file — make sure it's a backup exported from this app.");
+        playSound("error");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = ""; // allow re-selecting the same file later
+  };
+
+  const addTag = (name) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    setTags((prev) => (prev.some((t) => t.name.toLowerCase() === trimmed.toLowerCase()) ? prev : [...prev, { id: nextId(), name: trimmed }]));
+  };
+
+  const removeTag = (id) => {
+    setTags((prev) => prev.filter((t) => t.id !== id));
+    setPeople((prev) => prev.map((p) => ({ ...p, tagIds: (p.tagIds || []).filter((tid) => tid !== id) })));
+  };
+
+  const toggleTagForPerson = (personId, tagId) => {
+    setPeople((prev) =>
+      prev.map((p) => {
+        if (p.id !== personId) return p;
+        const has = (p.tagIds || []).includes(tagId);
+        return { ...p, tagIds: has ? p.tagIds.filter((id) => id !== tagId) : [...(p.tagIds || []), tagId] };
+      })
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <Header
+          view={view}
+          setView={setView}
+          onBackup={handleBackup}
+          onRestoreClick={handleRestoreClick}
+          dataMessage={dataMessage}
+          soundOn={soundOn}
+          onToggleSound={() => setSoundOn((s) => !s)}
+          theme={theme}
+          workingDate={workingDate}
+          onWorkingDateChange={setWorkingDate}
+        />
+        <input
+          ref={restoreInputRef}
+          type="file"
+          accept="application/json,.json"
+          onChange={handleRestoreFile}
+          className="hidden"
+        />
+        {view === "people" ? (
+          <PeoplePage
+            people={people}
+            setPeople={setPeople}
+            tasks={tasks}
+            tags={tags}
+            onAddTag={addTag}
+            onRemoveTag={removeTag}
+            onToggleTag={toggleTagForPerson}
+            accent={theme}
+            workingDate={workingDate}
+          />
+        ) : (
+          <AllocationPage people={people} tasks={tasks} setTasks={setTasks} tags={tags} accent={theme} workingDate={workingDate} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Header({ view, setView, onBackup, onRestoreClick, dataMessage, soundOn, onToggleSound, theme, workingDate, onWorkingDateChange }) {
+  return (
+    <div className="flex flex-col gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">सेवा नियोजन</h1>
+          <p className="text-sm text-slate-500 mt-0.5">Match people to tasks without double-booking anyone.</p>
+        </div>
+        <div className="flex items-center gap-3 self-start sm:self-auto">
+          <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
+            <label className="text-xs text-slate-400 whitespace-nowrap">Planning for</label>
+            <input
+              type="date"
+              value={workingDate}
+              onChange={(e) => onWorkingDateChange(e.target.value)}
+              className="text-sm font-medium text-slate-700 border-none focus:outline-none focus:ring-0 bg-transparent"
+            />
+          </div>
+          <nav className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
+            <TabButton active={view === "people"} onClick={() => setView("people")} icon={<Users size={16} />} label="People" accent={theme} />
+            <TabButton active={view === "allocation"} onClick={() => setView("allocation")} icon={<Briefcase size={16} />} label="Allocation" accent={theme} />
+          </nav>
+        </div>
+      </div>
+      <div className="flex flex-wrap items-center gap-2 self-start">
+        <button
+          onClick={onBackup}
+          data-sound="success"
+          className="flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-white hover:bg-slate-700 border border-slate-200 hover:border-slate-700 px-3 py-1.5 rounded-lg transition-colors"
+        >
+          <Upload size={13} /> Backup
+        </button>
+        <button
+          onClick={onRestoreClick}
+          className="flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-white hover:bg-slate-700 border border-slate-200 hover:border-slate-700 px-3 py-1.5 rounded-lg transition-colors"
+        >
+          <Download size={13} /> Restore
+        </button>
+        <button
+          onClick={onToggleSound}
+          data-sound="toggle"
+          title={soundOn ? "Click sounds on — click to mute" : "Click sounds off — click to unmute"}
+          className="flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-white hover:bg-slate-700 border border-slate-200 hover:border-slate-700 px-3 py-1.5 rounded-lg transition-colors"
+        >
+          {soundOn ? <Volume2 size={13} /> : <VolumeX size={13} />}
+        </button>
+        {dataMessage && <span className="text-xs text-emerald-600 font-medium">{dataMessage}</span>}
+      </div>
+    </div>
+  );
+}
+
+function TabButton({ active, onClick, icon, label, accent }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+        active ? `bg-${accent}-600 text-white shadow-sm` : "text-slate-500 hover:text-slate-800 hover:bg-slate-100"
+      }`}
+    >
+      {icon}
+      {label}
+    </button>
+  );
+}
+
+/* ------------------------- PEOPLE PAGE ------------------------- */
+
+function PeoplePage({ people, setPeople, tasks, tags, onAddTag, onRemoveTag, onToggleTag, accent, workingDate }) {
+  const [name, setName] = useState("");
+  const [tagInput, setTagInput] = useState("");
+
+  const addPerson = (e) => {
+    e.preventDefault();
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    setPeople((prev) => [...prev, { id: nextId(), name: trimmed, availableDays: new Set(), blackoutDates: [], capacity: 1, notes: "", tagIds: [] }]);
+    setName("");
+  };
+
+  const deletePerson = (id) => setPeople((prev) => prev.filter((p) => p.id !== id));
+
+  const updatePerson = (id, updater) =>
+    setPeople((prev) => prev.map((p) => (p.id === id ? updater(p) : p)));
+
+  const submitTag = (e) => {
+    e.preventDefault();
+    onAddTag(tagInput);
+    setTagInput("");
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={addPerson} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row gap-3">
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Add a person by name..."
+          className="flex-1 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
+        <button
+          type="submit"
+          data-sound="add"
+          className={`flex items-center justify-center gap-1.5 bg-${accent}-600 hover:bg-${accent}-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors`}
+        >
+          <Plus size={16} /> Add person
+        </button>
+      </form>
+
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide flex items-center gap-1">
+          <Tag size={13} /> Manage tags
+        </p>
+        <form onSubmit={submitTag} className="flex gap-2 mb-3">
+          <input
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            placeholder="Create a tag, e.g. Senior, Frontend..."
+            className="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+          <button
+            type="submit"
+            data-sound="add"
+            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium px-3.5 py-2 rounded-lg transition-colors"
+          >
+            <Plus size={14} /> Create
+          </button>
+        </form>
+        {tags.length === 0 ? (
+          <p className="text-xs text-slate-400">No tags yet. Create one above, then apply it to people below.</p>
+        ) : (
+          <div className="flex flex-wrap gap-1.5">
+            {tags.map((t) => (
+              <span key={t.id} className="inline-flex items-center gap-1 bg-violet-50 text-violet-700 text-xs font-medium px-2.5 py-1 rounded-full">
+                {t.name}
+                <button onClick={() => onRemoveTag(t.id)} data-sound="remove" className="hover:text-violet-900">
+                  <X size={12} />
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {people.length === 0 ? (
+        <EmptyState icon={<Users size={28} className="text-slate-300" />} text="No one added yet. Add your first team member above." />
+      ) : (
+        <div className="grid sm:grid-cols-2 gap-4">
+          {people.map((p) => {
+            const usage = tasks.reduce((sum, t) => {
+              const a = t.assignments.find((a) => a.personId === p.id && a.date === workingDate);
+              return a ? sum + a.amount : sum;
+            }, 0);
+            const taskCount = tasks.filter((t) => t.assignments.some((a) => a.personId === p.id && a.date === workingDate)).length;
+            return (
+              <PersonCard
+                key={p.id}
+                person={p}
+                onDelete={() => deletePerson(p.id)}
+                onUpdate={(updater) => updatePerson(p.id, updater)}
+                taskCount={taskCount}
+                usage={usage}
+                tags={tags}
+                onToggleTag={(tagId) => onToggleTag(p.id, tagId)}
+                accent={accent}
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PersonCard({ person, onDelete, onUpdate, taskCount, usage, tags, onToggleTag, accent }) {
+  const [editing, setEditing] = useState(false);
+  const [draftName, setDraftName] = useState(person.name);
+
+  const toggleDay = (day) => {
+    onUpdate((p) => {
+      const next = new Set(p.availableDays);
+      next.has(day) ? next.delete(day) : next.add(day);
+      return { ...p, availableDays: next };
+    });
+  };
+
+  const saveName = () => {
+    const trimmed = draftName.trim();
+    if (trimmed) onUpdate((p) => ({ ...p, name: trimmed }));
+    setEditing(false);
+  };
+
+  const removeBlackout = (date) => onUpdate((p) => ({ ...p, blackoutDates: p.blackoutDates.filter((d) => d !== date) }));
+
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [pendingDates, setPendingDates] = useState([]);
+
+  const togglePendingDate = (iso) =>
+    setPendingDates((prev) => (prev.includes(iso) ? prev.filter((d) => d !== iso) : [...prev, iso]));
+
+  const confirmPendingDates = () => {
+    if (pendingDates.length > 0) {
+      onUpdate((p) => ({ ...p, blackoutDates: Array.from(new Set([...p.blackoutDates, ...pendingDates])).sort() }));
+    }
+    setPendingDates([]);
+    setCalendarOpen(false);
+  };
+
+  const cancelPendingDates = () => {
+    setPendingDates([]);
+    setCalendarOpen(false);
+  };
+
+  const setCapacity = (val) => {
+    const n = Math.max(1, parseInt(val, 10) || 1);
+    onUpdate((p) => ({ ...p, capacity: n }));
+  };
+
+  const setNotes = (val) => onUpdate((p) => ({ ...p, notes: val }));
+
+  return (
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
+      <div className="flex items-start justify-between gap-2">
+        {editing ? (
+          <input
+            autoFocus
+            value={draftName}
+            onChange={(e) => setDraftName(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && saveName()}
+            onBlur={saveName}
+            className="border border-indigo-300 rounded-lg px-2.5 py-1.5 text-sm font-semibold flex-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        ) : (
+          <div>
+            <h3 className="font-semibold text-slate-900">{person.name}</h3>
+            {taskCount > 0 && (
+              <span className="inline-flex items-center gap-1 text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full mt-1">
+                <CheckCircle2 size={12} /> {taskCount} task{taskCount > 1 ? "s" : ""} · {usage}/{person.capacity ?? 1} capacity used
+              </span>
+            )}
+          </div>
+        )}
+        <div className="flex items-center gap-1 shrink-0">
+          <button onClick={() => setEditing((e) => !e)} className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors">
+            <Pencil size={15} />
+          </button>
+          <button onClick={onDelete} data-sound="remove" className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors">
+            <Trash2 size={15} />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
+        <label className="text-xs font-medium text-slate-500 uppercase tracking-wide">संख्या</label>
+        <input
+          type="number"
+          min="1"
+          step="1"
+          value={person.capacity ?? 1}
+          onChange={(e) => setCapacity(e.target.value)}
+          className="w-16 border border-slate-200 rounded-md px-2 py-1 text-sm text-center focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+
+      <div>
+        <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">Available days</p>
+        <div className="flex flex-wrap gap-1.5">
+          {DAYS.map((day) => {
+            const on = person.availableDays.has(day);
+            return (
+              <button
+                key={day}
+                onClick={() => toggleDay(day)}
+                data-sound="toggle"
+                className={`w-10 h-9 rounded-lg text-xs font-semibold border transition-colors ${
+                  on
+                    ? `bg-${accent}-600 border-${accent}-600 text-white`
+                    : `bg-white border-slate-200 text-slate-400 hover:border-${accent}-300 hover:text-${accent}-500`
+                }`}
+              >
+                {day}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide flex items-center gap-1">
+          <Tag size={13} /> Tags
+        </p>
+        {tags.length === 0 ? (
+          <p className="text-xs text-slate-400">No tags yet — create some on the People page above.</p>
+        ) : (
+          <div className="flex flex-wrap gap-1.5">
+            {tags.map((t) => {
+              const on = (person.tagIds || []).includes(t.id);
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => onToggleTag(t.id)}
+                  data-sound="toggle"
+                  className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-colors ${
+                    on
+                      ? "bg-violet-600 border-violet-600 text-white"
+                      : "bg-white border-slate-200 text-slate-500 hover:border-violet-300 hover:text-violet-600"
+                  }`}
+                >
+                  {t.name}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide flex items-center gap-1">
+          <CalendarX2 size={13} /> Blackout dates
+        </p>
+
+        {calendarOpen ? (
+          <div className="space-y-2 mb-2">
+            <MiniCalendar selectedDates={pendingDates} existingDates={person.blackoutDates} onToggleDate={togglePendingDate} />
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-slate-500">{pendingDates.length} selected</span>
+              <div className="flex gap-2">
+                <button onClick={cancelPendingDates} className="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+                  Cancel
+                </button>
+                <button onClick={confirmPendingDates} data-sound="add" className="px-3 py-1.5 text-xs font-medium bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors">
+                  Add selected
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setCalendarOpen(true)}
+            className="flex items-center gap-1 px-3 py-1.5 mb-2 text-xs font-medium text-rose-600 hover:bg-rose-50 border border-rose-200 rounded-lg transition-colors"
+          >
+            <Plus size={12} /> Add blackout dates
+          </button>
+        )}
+
+        {person.blackoutDates.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {person.blackoutDates.map((d) => (
+              <span key={d} className="inline-flex items-center gap-1 bg-rose-50 text-rose-700 text-xs px-2 py-1 rounded-full">
+                {formatDate(d)}
+                <button onClick={() => removeBlackout(d)} data-sound="remove" className="hover:text-rose-900">
+                  <X size={12} />
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wide">Notes</p>
+        <textarea
+          value={person.notes || ""}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Anything worth remembering about this person..."
+          rows={2}
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------- ALLOCATION PAGE ------------------------- */
+
+function AllocationPage({ people, tasks, setTasks, tags, accent, workingDate }) {
+  const [taskName, setTaskName] = useState("");
+  const [taskCapacity, setTaskCapacity] = useState(1);
+  const [formError, setFormError] = useState("");
+  const [toast, setToast] = useState("");
+  const [availabilityOpen, setAvailabilityOpen] = useState(false);
+  const [availabilityDate, setAvailabilityDate] = useState(workingDate);
+
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2500);
+  };
+
+  const addTask = (e) => {
+    e.preventDefault();
+    if (!taskName.trim()) {
+      setFormError("Task name can't be empty.");
+      return;
+    }
+    setFormError("");
+    const cap = Math.max(1, parseInt(taskCapacity, 10) || 1);
+    // Tasks are permanent/recurring — no date on the task itself. Only who's assigned changes day to day.
+    setTasks((prev) => [...prev, { id: nextId(), name: taskName.trim(), capacity: cap, assignments: [] }]);
+    setTaskName("");
+    setTaskCapacity(1);
+  };
+
+  const deleteTask = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
+
+  const updateTask = (id, fields) => setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, ...fields } : t)));
+
+  // Adding a person fills as much of the task's remaining capacity (for the selected working date)
+  // as their own remaining daily capacity allows — so a cap-5 task can be split across several people.
+  const addAssignment = (taskId, personId) => {
+    setTasks((prev) => {
+      const task = prev.find((t) => t.id === taskId);
+      if (!task) return prev;
+      const person = people.find((p) => p.id === personId);
+      if (!person) return prev;
+
+      const taskUsed = task.assignments.filter((a) => a.date === workingDate).reduce((sum, a) => sum + a.amount, 0);
+      const taskRemaining = task.capacity - taskUsed;
+      if (taskRemaining <= 0) return prev;
+
+      const personCapacity = person.capacity || 1;
+      const personUsedThatDay = prev.reduce((sum, t) => {
+        return sum + t.assignments.filter((a) => a.date === workingDate && a.personId === personId).reduce((s, a) => s + a.amount, 0);
+      }, 0);
+      const personRemaining = personCapacity - personUsedThatDay;
+      if (personRemaining <= 0) return prev;
+
+      const amount = Math.min(taskRemaining, personRemaining);
+      return prev.map((t) =>
+        t.id === taskId ? { ...t, assignments: [...t.assignments, { personId, amount, date: workingDate }] } : t
+      );
+    });
+  };
+
+  const removeAssignment = (taskId, personId) =>
+    setTasks((prev) =>
+      prev.map((t) =>
+        t.id === taskId
+          ? { ...t, assignments: t.assignments.filter((a) => !(a.personId === personId && a.date === workingDate)) }
+          : t
+      )
+    );
+
+  // Clears only the working date's allocations — other days' assignment history stays intact.
+  const clearAllocations = () =>
+    setTasks((prev) => prev.map((t) => ({ ...t, assignments: t.assignments.filter((a) => a.date !== workingDate) })));
+
+  // Total amount each person is already booked for on the working date, summed across every task.
+  const bookingCounts = useMemo(() => {
+    const map = new Map();
+    tasks.forEach((t) => {
+      t.assignments.forEach((a) => {
+        if (a.date !== workingDate) return;
+        map.set(a.personId, (map.get(a.personId) || 0) + a.amount);
+      });
+    });
+    return map;
+  }, [tasks, workingDate]);
+
+  const optionsFor = (task) => {
+    const wd = weekdayOf(workingDate);
+    const todaysAssignments = task.assignments.filter((a) => a.date === workingDate);
+    const taskUsed = todaysAssignments.reduce((sum, a) => sum + a.amount, 0);
+    const taskRemaining = task.capacity - taskUsed;
+    if (taskRemaining <= 0) return [];
+
+    return people
+      .filter((p) => {
+        const alreadyOnThisTask = todaysAssignments.some((a) => a.personId === p.id);
+        if (alreadyOnThisTask) return false;
+        const prefMatch = p.availableDays.has(wd) && !p.blackoutDates.includes(workingDate);
+        if (!prefMatch) return false;
+        const capacity = p.capacity || 1;
+        const totalBooked = bookingCounts.get(p.id) || 0;
+        return totalBooked < capacity;
+      })
+      .map((p) => {
+        const capacity = p.capacity || 1;
+        const totalBooked = bookingCounts.get(p.id) || 0;
+        const personRemaining = capacity - totalBooked;
+        const willContribute = Math.min(taskRemaining, personRemaining);
+        return { person: p, capacity, used: totalBooked, willContribute };
+      });
+  };
+
+  const fullyStaffedCount = tasks.filter((t) => {
+    const used = t.assignments.filter((a) => a.date === workingDate).reduce((s, a) => s + a.amount, 0);
+    return used >= t.capacity;
+  }).length;
+
+  const shareTasks = async () => {
+    const tmwISO = tomorrowISO();
+    const d = new Date(tmwISO + "T00:00:00");
+    const header = `*${d.getDate()} ${MONTH_NAMES[d.getMonth()]} पाने अपलोड करण्याचे नियोजन:*`;
+
+    // Only tasks that actually have someone allotted for tomorrow are included — unallotted tasks are skipped entirely.
+    const bodyLines = [];
+    tasks.forEach((t) => {
+      const assignmentsTomorrow = t.assignments.filter((a) => a.date === tmwISO);
+      if (assignmentsTomorrow.length === 0) return;
+      bodyLines.push(t.name);
+      assignmentsTomorrow.forEach((a) => {
+        const person = people.find((p) => p.id === a.personId);
+        const nm = person ? person.name : "Unknown";
+        const amtPart = t.capacity > 1 ? ` (${a.amount})` : "";
+        // Every person line starts with the exact same "- " prefix, so they line up
+        // perfectly in any font — no monospace/code-block formatting needed.
+        bodyLines.push(`- ${nm}${amtPart}`);
+      });
+    });
+
+    const lines = [header, ""];
+    if (bodyLines.length === 0) {
+      lines.push("No tasks allotted for tomorrow yet.");
+    } else {
+      lines.push(...bodyLines);
+    }
+    const text = lines.join("\n").trim();
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "सेवा नियोजन", text });
+        return;
+      } catch (err) {
+        // user cancelled share sheet or it failed — fall back to clipboard below
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Copied to clipboard!");
+    } catch (err) {
+      showToast("Couldn't copy automatically — select and copy the text manually.");
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={addTask} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            placeholder="Task name..."
+            className="flex-1 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={taskCapacity}
+            onChange={(e) => setTaskCapacity(e.target.value)}
+            title="संख्या"
+            className="w-full sm:w-24 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+          <button
+            type="submit"
+            data-sound="add"
+            className={`flex items-center justify-center gap-1.5 bg-${accent}-600 hover:bg-${accent}-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors`}
+          >
+            <Plus size={16} /> Add task
+          </button>
+        </div>
+        {formError && <p className="text-xs text-rose-600 mt-2">{formError}</p>}
+        <p className="text-xs text-slate-400 mt-2">Tasks recur every day — you're only changing who's on them today. Use "Planning for" up top to switch days.</p>
+      </form>
+
+      <div>
+        <button
+          onClick={() => {
+            setAvailabilityDate(workingDate);
+            setAvailabilityOpen(true);
+          }}
+          data-sound="toggle"
+          className={`flex items-center gap-1.5 text-sm font-medium text-${accent}-600 hover:text-white hover:bg-${accent}-600 border border-${accent}-200 hover:border-${accent}-600 px-3.5 py-1.5 rounded-lg transition-colors`}
+        >
+          <UserCheck size={14} /> Who's available?
+        </button>
+      </div>
+
+      {tasks.length > 0 && (
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-5 py-3.5 shadow-sm">
+          <p className="text-sm text-slate-500">
+            <span className="font-semibold text-slate-800">{fullyStaffedCount}</span> of {tasks.length} tasks fully staffed
+          </p>
+          <div className="flex items-center gap-2 flex-wrap">
+            {toast && <span className="text-xs text-emerald-600 font-medium">{toast}</span>}
+            <button
+              onClick={shareTasks}
+              data-sound="success"
+              className={`flex items-center gap-1.5 text-sm font-medium text-${accent}-600 hover:text-white hover:bg-${accent}-600 border border-${accent}-200 hover:border-${accent}-600 px-3.5 py-1.5 rounded-lg transition-colors`}
+            >
+              <Share2 size={14} /> Share
+            </button>
+            <button
+              onClick={clearAllocations}
+              data-sound="remove"
+              className="flex items-center gap-1.5 text-sm font-medium text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-200 hover:border-rose-600 px-3.5 py-1.5 rounded-lg transition-colors"
+            >
+              <RotateCcw size={14} /> Clear daily allocations
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tasks.length === 0 ? (
+        <EmptyState icon={<Briefcase size={28} className="text-slate-300" />} text="No tasks yet. Add a task above to start allocating people." />
+      ) : (
+        <div className="space-y-3">
+          {tasks.map((task) => {
+            const assignmentsToday = task.assignments.filter((a) => a.date === workingDate);
+            return (
+              <TaskRow
+                key={task.id}
+                task={task}
+                assignments={assignmentsToday}
+                options={optionsFor(task)}
+                people={people}
+                tags={tags}
+                accent={accent}
+                onAddAssignment={(personId) => {
+                  addAssignment(task.id, personId);
+                  playSound("add");
+                }}
+                onRemoveAssignment={(personId) => removeAssignment(task.id, personId)}
+                onCapacityChange={(cap) => updateTask(task.id, { capacity: Math.max(1, parseInt(cap, 10) || 1) })}
+                onDelete={() => deleteTask(task.id)}
+              />
+            );
+          })}
+        </div>
+      )}
+
+      {availabilityOpen && (
+        <AvailabilityModal
+          date={availabilityDate}
+          onDateChange={setAvailabilityDate}
+          people={people}
+          tasks={tasks}
+          tags={tags}
+          accent={accent}
+          onClose={() => setAvailabilityOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+function TaskRow({ task, assignments, options, people, tags, accent, onAddAssignment, onRemoveAssignment, onCapacityChange, onDelete }) {
+  const used = assignments.reduce((sum, a) => sum + a.amount, 0);
+  const remaining = task.capacity - used;
+  const isFull = remaining <= 0;
+
+  const tagNamesFor = (person) =>
+    (person.tagIds || []).map((id) => tags.find((t) => t.id === id)).filter(Boolean);
+
+  return (
+    <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-slate-900 truncate">{task.name}</p>
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          <label className="text-xs text-slate-400">संख्या</label>
+          <input
+            type="number"
+            min="1"
+            step="1"
+            value={task.capacity ?? 1}
+            onChange={(e) => onCapacityChange(e.target.value)}
+            className="w-14 border border-slate-200 rounded-md px-1.5 py-1 text-sm text-center focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          {isFull ? (
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
+              <Check size={12} /> Full ({used}/{task.capacity})
+            </span>
+          ) : used > 0 ? (
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">
+              <CircleDashed size={12} /> Partial ({used}/{task.capacity})
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
+              <CircleDashed size={12} /> Unassigned (0/{task.capacity})
+            </span>
+          )}
+        </div>
+
+        <button onClick={onDelete} data-sound="remove" className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors shrink-0 sm:ml-auto">
+          <Trash2 size={15} />
+        </button>
+      </div>
+
+      {assignments.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {assignments.map((a) => {
+            const person = people.find((p) => p.id === a.personId);
+            if (!person) return null;
+            const capacity = person.capacity || 1;
+            const personTags = tagNamesFor(person);
+            return (
+              <span key={a.personId} className={`inline-flex items-center gap-1.5 bg-${accent}-50 text-${accent}-700 text-xs font-medium px-2.5 py-1.5 rounded-full`}>
+                {person.name} ({a.amount}/{capacity})
+                {personTags.length > 0 && (
+                  <span className="flex gap-1">
+                    {personTags.map((t) => (
+                      <span key={t.id} className="bg-violet-200 text-violet-800 rounded px-1.5 py-0.5 text-[10px] font-semibold">
+                        {t.name}
+                      </span>
+                    ))}
+                  </span>
+                )}
+                <button onClick={() => onRemoveAssignment(a.personId)} data-sound="remove" className={`hover:text-${accent}-900`}>
+                  <X size={12} />
+                </button>
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      {isFull ? (
+        <p className="text-xs text-slate-400">This task is fully staffed. Remove someone above to free up a slot.</p>
+      ) : (
+        <div className="flex items-center gap-2">
+          <select
+            value=""
+            onChange={(e) => e.target.value && onAddAssignment(Number(e.target.value))}
+            className="flex-1 sm:max-w-xs border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="">
+              {options.length === 0 ? "No one available for this slot" : `Add someone — ${remaining} slot${remaining > 1 ? "s" : ""} left`}
+            </option>
+            {options.map(({ person: p, willContribute, capacity }) => {
+              const personTags = tagNamesFor(p);
+              const tagSuffix = personTags.length > 0 ? ` [${personTags.map((t) => t.name).join(", ")}]` : "";
+              return (
+                <option key={p.id} value={p.id}>
+                  {p.name} (+{willContribute}/{capacity}){tagSuffix}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AvailabilityModal({ date, onDateChange, people, tasks, tags, accent, onClose }) {
+  const wd = weekdayOf(date);
+  const [toast, setToast] = useState("");
+
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2500);
+  };
+
+  const bookedAmount = (personId) =>
+    tasks.reduce((sum, t) => {
+      return sum + t.assignments.filter((a) => a.personId === personId && a.date === date).reduce((s, a) => s + a.amount, 0);
+    }, 0);
+
+  const tagNamesFor = (person) =>
+    (person.tagIds || []).map((id) => tags.find((t) => t.id === id)).filter(Boolean);
+
+  const isAvailable = (p) => p.availableDays.has(wd) && !p.blackoutDates.includes(date);
+  const available = people.filter(isAvailable);
+  const unavailable = people.filter((p) => !isAvailable(p));
+
+  const shareAvailability = async () => {
+    const lines = ["*आज सेवेला उपलब्ध साधक:*", ""];
+    available.forEach((p, idx) => {
+      const personTags = tagNamesFor(p);
+      const tagPart = personTags.length > 0 ? ` - ${personTags.map((t) => t.name).join(" | ")}` : "";
+      lines.push(`${idx + 1}. ${p.name}${tagPart}`);
+    });
+    const text = lines.join("\n");
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Available today", text });
+        return;
+      } catch (err) {
+        // fall back to clipboard below
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast("Copied to clipboard!");
+      playSound("success");
+    } catch (err) {
+      showToast("Couldn't copy automatically — select and copy manually.");
+      playSound("error");
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-5 max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-slate-900 flex items-center gap-1.5"><UserCheck size={16} /> Who's available?</h3>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={shareAvailability}
+              data-sound="toggle"
+              title="Share available list"
+              className={`p-1.5 text-${accent}-600 hover:text-white hover:bg-${accent}-600 rounded-md transition-colors`}
+            >
+              <Share2 size={16} />
+            </button>
+            <button onClick={onClose} data-sound="toggle" className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md">
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+
+        {toast && <p className="text-xs text-emerald-600 font-medium mb-2">{toast}</p>}
+
+        <input
+          type="date"
+          value={date}
+          onChange={(e) => onDateChange(e.target.value)}
+          className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm mb-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <p className="text-xs text-slate-400 mb-4">
+          {formatDate(date)} · {wd}
+        </p>
+
+        <p className="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-2">Available ({available.length})</p>
+        {available.length === 0 ? (
+          <p className="text-sm text-slate-400 mb-4">No one is scheduled to work this day.</p>
+        ) : (
+          <div className="space-y-1.5 mb-4">
+            {available.map((p) => {
+              const capacity = p.capacity || 1;
+              const used = bookedAmount(p.id);
+              const personTags = tagNamesFor(p);
+              return (
+                <div key={p.id} className="flex items-center justify-between bg-emerald-50 rounded-lg px-3 py-2 gap-2">
+                  <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+                    <span className="text-sm font-medium text-slate-800 truncate">{p.name}</span>
+                    {personTags.map((t) => (
+                      <span key={t.id} className="bg-violet-200 text-violet-800 rounded px-1.5 py-0.5 text-[10px] font-semibold shrink-0">
+                        {t.name}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs font-medium text-emerald-700 shrink-0">
+                    {used}/{capacity} used
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {unavailable.length > 0 && (
+          <>
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Not available ({unavailable.length})</p>
+            <div className="space-y-1.5">
+              {unavailable.map((p) => {
+                const reason = p.blackoutDates.includes(date) ? "Blackout date" : `Not scheduled for ${wd}`;
+                return (
+                  <div key={p.id} className="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2 gap-2">
+                    <span className="text-sm text-slate-500 truncate">{p.name}</span>
+                    <span className="text-xs text-slate-400 shrink-0">{reason}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function MiniCalendar({ selectedDates, existingDates, onToggleDate }) {
+  const [viewDate, setViewDate] = useState(() => new Date());
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const startOffset = (firstDay.getDay() + 6) % 7; // Monday-first grid
+  const totalDays = new Date(year, month + 1, 0).getDate();
+  const pad = (n) => String(n).padStart(2, "0");
+  const cellISO = (day) => `${year}-${pad(month + 1)}-${pad(day)}`;
+  const monthLabel = viewDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+  const cells = [];
+  for (let i = 0; i < startOffset; i++) cells.push(null);
+  for (let day = 1; day <= totalDays; day++) cells.push(day);
+
+  return (
+    <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
+      <div className="flex items-center justify-between mb-2">
+        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} className="p-1 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-md" data-sound="toggle">
+          <ChevronLeft size={16} />
+        </button>
+        <p className="text-sm font-semibold text-slate-700">{monthLabel}</p>
+        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} className="p-1 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-md" data-sound="toggle">
+          <ChevronRight size={16} />
+        </button>
+      </div>
+      <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-semibold text-slate-400 mb-1">
+        {DAYS.map((d) => (
+          <div key={d}>{d[0]}</div>
+        ))}
+      </div>
+      <div className="grid grid-cols-7 gap-1">
+        {cells.map((day, idx) => {
+          if (day === null) return <div key={idx} />;
+          const iso = cellISO(day);
+          const isSelected = selectedDates.includes(iso);
+          const isExisting = existingDates.includes(iso);
+          return (
+            <button
+              key={idx}
+              onClick={() => onToggleDate(iso)}
+              data-sound="toggle"
+              className={`h-8 rounded-md text-xs font-medium transition-colors ${
+                isSelected
+                  ? "bg-rose-600 text-white"
+                  : isExisting
+                  ? "bg-rose-100 text-rose-600"
+                  : "text-slate-600 hover:bg-slate-200"
+              }`}
+            >
+              {day}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function EmptyState({ icon, text }) {
+  return (
+    <div className="bg-white border border-dashed border-slate-300 rounded-2xl py-14 flex flex-col items-center justify-center gap-3 text-center">
+      {icon}
+      <p className="text-sm text-slate-500 max-w-xs">{text}</p>
+    </div>
+  );
+}
+
+try {
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+} catch (err) {
+  const box = document.getElementById("error-box");
+  box.style.display = "block";
+  box.textContent += "Render error: " + err.message + "\n" + (err.stack || "");
+}
+</script>
+</body>
+</html>
